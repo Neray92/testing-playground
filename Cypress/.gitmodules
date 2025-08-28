@@ -1,0 +1,3 @@
+[submodule "cypress-realworld-testing-course-app"]
+	path = cypress-realworld-testing-course-app
+	url = https://github.com/Neray92/testing-playground.git
