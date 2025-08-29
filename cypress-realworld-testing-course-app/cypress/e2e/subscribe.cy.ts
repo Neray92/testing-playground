@@ -12,7 +12,7 @@ describe("Newsletter Subscribe Form", () => {
       .and('contain', `Success: ${email} has been successfully subscribed`)
   })
   
-  it("allows users to see an error message if the email is invalid", () => {
+  it("does NOT allow an invalid email addressd", () => {
       const email = "invalid-email"
       cy.getById('email').type(email)
       cy.getByData('submit-button').click()
@@ -20,4 +20,14 @@ describe("Newsletter Subscribe Form", () => {
           .should('not.exist') // this assertion will fail because the error message is visible
   
     })
+
+   it("does NOT allow already subscribed email addresses", () => { 
+      const email = "john@example.com"
+      cy.getById('email').type(email)
+      cy.getByData('submit-button').click()
+      cy.getByData('server-error-message')
+          .should('be.visible')
+          .and('contain', `Error: ${email} already exists. Please use a different email address.`)
+    })
+  
   })

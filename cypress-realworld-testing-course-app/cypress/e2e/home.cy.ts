@@ -1,7 +1,17 @@
-describe("home page", () => {
+describe("Home page", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000")
   })
+
+  
+
+
+    context("Hero section", () => {
+    it("the h1 contains the correct text", () => {
+      cy.getByData("hero-heading").contains(
+        "Testing Next.js Applications with Cypress"
+      )
+    })
 
   it('open the app page and verify that h1 contains the correct text', () => {
     cy.get('[data-test="hero-heading"]').contains('Testing Next.js Applications with Cypress') // forme basique 
@@ -19,7 +29,19 @@ it("the features on the homepage are correct", () => {
       })
     })
   
-    it("fill the subscribe form and submit", () => {
-      cy.getById('email').type("test@mail.com")
+  context("Course section ", () => {
+    it("Course: Testing Your First Next.js Application", () => {
+      cy.getByData("course-0").find("a").contains("Get started").click() // on cible le lien dans le 1er cours
+      cy.location("pathname").should("equal", "/testing-your-first-application")// on vérifie que le lien nous amène à la bonne page
+    })
+    it("Course: Testing Foundations", () => {
+      cy.getByData("course-1").find("a").contains("Get started").click() // on cible le lien dans le 1er cours
+      cy.location("pathname").should("equal", "/testing-foundations")// on vérifie que le lien nous amène à la bonne page
+    })
+       it("Course:Cypress Fundamentals", () => {
+      cy.getByData("course-2").find("a").contains("Get started").click() // on cible le lien dans le 1er cours
+      cy.location("pathname").should("equal", "/cypress-fundamentals")// on vérifie que le lien nous amène à la bonne page
     })
   })
+})
+})
